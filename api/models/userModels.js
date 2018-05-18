@@ -25,6 +25,16 @@ UserSchema.pre("save", function(next) {
   // Fill this middleware in with the Proper password encrypting, bcrypt.hash()
   // if there is an error here you'll need to handle it by calling next(err);
   // Once the password is encrypted, call next() so that your userController and create a user
+  console.log("Pre save hook");
+  bcrypt
+    .hash(this.password, 12)
+    .then(hash => {
+      this.password = hash;
+      next();
+    })
+    .catch(error => {
+      console.log("Error hashing", error);
+    });
 });
 
 UserSchema.methods.checkPassword = function(plainTextPW, callBack) {
