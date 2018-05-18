@@ -8,29 +8,42 @@ class SignUp extends React.Component {
     password: ""
   };
 
+  inputHandler = event => {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  };
+
   render() {
     return (
-      <form>
+      <div>
+        <form>
+          <div>
+            <input
+              name="username"
+              type="text"
+              value={this.state.username}
+              onChange={this.inputHandler}
+              placeholder="Username"
+            />
+          </div>
+          <div>
+            <input
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.inputHandler}
+              placeholder="Password"
+            />
+          </div>
+          <button onSubmit={this.submitHandler}>Sign Up</button>
+        </form>
         <div>
-          <input
-            name="username"
-            type="text"
-            value={this.state.username}
-            onChange={this.inputHandler}
-            placeholder="Username"
-          />
+          <p>Already registered? Click here to log in.</p>
         </div>
-        <div>
-          <input
-            name="password"
-            type="password"
-            value={this.state.password}
-            onChange={this.inputHandler}
-            placeholder="Password"
-          />
-        </div>
-        <button onSubmit={this.submitHandler}>Sign Up</button>
-      </form>
+      </div>
     );
   }
 }
+
+export default SignUp;
